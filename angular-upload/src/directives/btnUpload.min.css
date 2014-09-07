@@ -25,14 +25,17 @@
   padding: 2px 15px;
   margin: 1px 0 0 0;
 }
+.center {
+  text-align: center !important;
+}
 .panel-default.him {
-  background-color: aliceblue;
-  border-color: dodgerblue;
+  background-color: LavenderBlush;
+  border-color: LightCoral;
 }
 .panel-default.him .panel-heading {
   color: #333333;
-  background-color: #add8e6;
-  border-color: dodgerblue;
+  background-color: Lavender;
+  border-color: LightCoral;
 }
 .panel-default.her {
   background-color: HoneyDew;
