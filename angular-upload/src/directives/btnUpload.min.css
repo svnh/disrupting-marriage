@@ -28,21 +28,44 @@
 .center {
   text-align: center !important;
 }
-.panel-default.him {
-  background-color: LavenderBlush;
-  border-color: LightCoral;
+.panel-default {
+  border-color: #273039;
 }
-.panel-default.him .panel-heading {
-  color: #333333;
-  background-color: Lavender;
-  border-color: LightCoral;
+.panel-default .panel-heading {
+  color: #FDF3E7;
+  background-color: #7E8F7C;
+  border-color: #3B3738;
 }
-.panel-default.her {
-  background-color: HoneyDew;
-  border-color: green;
+body {
+  background-color: #FDF3E7;
 }
-.panel-default.her .panel-heading {
-  color: #333333;
-  background-color: LightGreen;
-  border-color: green;
+.light-gray {
+  background-color: #C63D0F ;
+  color: #3B3738;
+}
+.jumbotron {
+  color: #FDF3E7;
+}
+.btn-primary {
+  color: #ffffff;
+  background-color: #a7b2a5;
+  border-color: #3B3738;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #596758;
+  border-color: #285e8e;
+}
+.modal-header,
+.modal-footer {
+  background-color: #FDF3E7;
+  color: #C63D0F;
+}
+.modal-body {
+  background-color: #C63D0F ;
+  color: #FDF3E7;
 }
