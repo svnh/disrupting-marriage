@@ -50,14 +50,22 @@
       });
 
       // Global handler for onSuccess that adds the uploaded files to the list
-      $scope.onGlobalSuccess = function (response) {
+      $scope.onGlobalSuccess1 = function (response) {
         console.log(response.data);
+        console.log('AppCtrl.onSuccess', response);
+        $scope.fakeData1 = fakeData1;
+        $scope.responseData = response.data;
+        $scope.uploads = $scope.uploads.concat(response.data.files);
+      };
+
+      $scope.onGlobalSuccess2 = function (response) {
+        console.log(response.data);
+        $scope.fakeData2 = fakeData2;
 
         console.log('AppCtrl.onSuccess', response);
         $scope.responseData = response.data;
         $scope.uploads = $scope.uploads.concat(response.data.files);
       };
-
 
       var barFrameResuls = function(data) {
         return _.map(data, function(result) {
@@ -104,7 +112,8 @@
         $http({
           method: 'post',
 //          url: 'http://still--1197.herokuapp.com/process',
-          url: 'http://localhost:4567/process',
+//          url: 'http://localhost:4567/process',
+          url: 'http://still-headland-1197.herokuapp.com/process',
           crossDomain: true,
           data: {
             "emovuData": [$scope.fakeData1, $scope.fakeData2]
@@ -140,10 +149,6 @@
       </div>
     </div>
 
-    <div class="alert alert-info" ng-show="responseData">
-      <strong>Last upload response</strong>
-      {{responseData | json}}
-    </div>
     <div class="row">
       <div class="col-md-6">
         <div class="panel panel-default him" ng-controller="SimpleCtrl">
@@ -154,7 +159,7 @@
             <upload-button
               class="btn btn-primary btn-upload"
               url="https://eyeris-emovu1.p.mashape.com/api/video/"
-              on-success="onGlobalSuccess(response)"
+              on-success="onGlobalSuccess1(response)"
               headers='{X-Mashape-Key: "p2YEJ3Z7lBmshli8kbKm1iDDlE2Yp1Pi3Pxjsn1pG4zTFz8LEl"}'
             >Fileupload</upload-button>
           </div>
@@ -163,7 +168,7 @@
               class="btn btn-primary btn-upload"
               method="GET"
               url="/upload"
-              on-success="onGlobalSuccess(response)"
+              on-success="onGlobalSuccess2(response)"
             >Fileupload FAKE</upload-button>
           </div>
         </div>
@@ -190,11 +195,10 @@
           </div>
         </div>
       </div>
-      <button class="btn btn-primary btn-upload" ng-click='process()'>Process</button>
+      <button class="btn btn-primary btn-upload" ng-show="fakeData1 && fakeData2" ng-click='process()'>Process</button>
        <div style="display:inline; text-align:center;">
         <h3>Partner A</h3>
         <linechart data="partner1Data" options="options" mode=""></linechart>
-
         <h3>Partner B</h3>
         <linechart data="partner2Data" options="options" mode=""></linechart>
       </div>
