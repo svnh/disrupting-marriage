@@ -4,9 +4,13 @@ var path = require('path');
 var fs = require('fs');
 var util = require('util');
 var express = require('express');
+var connect = require('connect');
+var cors = require('cors')
 
 var app = express();
 app.use(express.bodyParser());
+
+app.use(cors())
 
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname);
@@ -30,7 +34,7 @@ app.get('/uploads', function (req, res) {
   })
 });
 
-app.post('/upload', function(req, res) {
+app.post('/process', function(req, res) {
   var files = util.isArray(req.files.file) ? req.files.file : [req.files.file];
 
   console.log(files);

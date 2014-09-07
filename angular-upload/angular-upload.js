@@ -16,7 +16,8 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
       onUpload: '&',
       onSuccess: '&',
       onError: '&',
-      onComplete: '&'
+      onComplete: '&',
+      headers: '@'
     },
     link: function(scope, element, attr) {
 
@@ -34,7 +35,9 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
           url: scope.url,
           method: scope.method || 'POST',
           forceIFrameUpload: scope.$eval(attr.forceIframeUpload) || false,
-          data: scope.data || {}
+          data: scope.data || {},
+          headers: scope.headers || {},
+          crossDomain: true
         };
 
         options.data[scope.param || 'file'] = fileInput;
