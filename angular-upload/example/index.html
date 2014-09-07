@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Disrupting Marriage</title>
+  <title>Divorce Disrupt</title>
   <meta name="description" content="" />
   <meta name="viewport" content="width=device-width" />
   <link rel="stylesheet" href="/public/bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -21,6 +21,7 @@
   <script src="/public/bower_components/n3-line-chart/dist/line-chart.js"></script>
   <script src="/public/bower_components/lodash/dist/lodash.min.js"></script>
   <script src="/public/bower_components/lodash/dist/lodash.underscore.min.js"></script>
+  <script src="/public/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="/public/example/fake_data_1.js"></script>
   <script src="/public/example/fake_data_2.js"></script>
 
@@ -32,8 +33,7 @@
       'n3-line-chart'
     ]);
 
-    app.controller('AppCtrl', function ($scope, $http) {
-
+    app.controller('AppCtrl', function ($scope, $http, $modal) {
       // App variable to show the uploaded response
       $scope.responseData = undefined;
       $scope.fakeData1 = null;
@@ -109,14 +109,36 @@
             "emovuData": [$scope.fakeData1, $scope.fakeData2]
           }
         }).success(function(data, status, headers, config) {
-          console.log(data);
+          $scope.score = data;
+          $scope.open('sm');
         }).error(function(data, status, headers, config) {
-          console.log(data);
-
+          console.log('error processing data', data);
         });
+      };
 
-      }
 
+      // Modal
+      $scope.open = function (size) {
+        var modalInstance = $modal.open({
+          templateUrl: 'myModalContent.html',
+          controller: ModalInstanceCtrl,
+          size: size,
+          windowClass: 'center',
+          resolve: {
+            score: function() {
+              return $scope.score;
+            }
+          }
+        });
+      };
+
+      var ModalInstanceCtrl = function ($scope, $modalInstance, score) {
+        $scope.score = score;
+
+        $scope.ok = function () {
+          $modalInstance.close();
+        };
+      };
     });
 
     app.controller('SimpleCtrl', function ($scope, $http) {
@@ -182,6 +204,22 @@
       </div>
     </div>
 
+  </div>
+
+
+  <div ng-controller="AppCtrl">
+      <script type="text/ng-template" id="myModalContent.html">
+          <div class="modal-header">
+            <h3>This couple&rsquo;s score is <b>{{ score.score }}</b></h3>
+          </div>
+          <div class="modal-body">
+            <h4>Partner A: {{ score.partner_1 | number:2 }}</h4>
+            <h4>Partner B: {{ score.partner_2 | number:2 }}</h4>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-primary" ng-click="ok()">OK</button>
+          </div>
+      </script>
   </div>
 
 </body>

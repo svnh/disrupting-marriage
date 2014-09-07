@@ -8,7 +8,8 @@
     "angular": ">=1.0.8",
     "d3": "~3.4.11",
     "n3-line-chart": "~1.1.2",
-    "lodash": "~2.4.1"
+    "lodash": "~2.4.1",
+    "angular-bootstrap": "~0.11.0"
   },
   "devDependencies": {
     "es5-shim": "~2.1.0",
