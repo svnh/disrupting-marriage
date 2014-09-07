@@ -5,7 +5,7 @@ angular.module('lr.upload.directives', []);
 
 'use strict';
 
-angular.module('lr.upload', ['ui.bootstrap']);
+angular.module('lr.modal', ['ui.bootstrap']);
 
 angular.module('lr.upload.directives').directive('uploadButton', function(upload) {
   return {

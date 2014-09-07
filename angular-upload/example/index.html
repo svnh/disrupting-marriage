@@ -30,6 +30,7 @@
     // Define our main app
     var app = angular.module('app', [
       'lr.upload',
+      'lr.modal',
       'n3-line-chart'
     ]);
 
@@ -50,12 +51,12 @@
       });
 
       // Global handler for onSuccess that adds the uploaded files to the list
-      $scope.onGlobalSuccess1 = function () {
+      $scope.onGlobalSuccess1 = function (response) {
         $scope.fakeData1 = fakeData1;
         $scope.partner1Data = barFrameResuls($scope.fakeData1.VideoFrameResults);
       };
 
-      $scope.onGlobalSuccess2 = function () {
+      $scope.onGlobalSuccess2 = function (response) {
         $scope.fakeData2 = fakeData2;
         $scope.partner2Data = barFrameResuls($scope.fakeData2.VideoFrameResults);
       };
@@ -169,9 +170,12 @@
               <h3 class="panel-title">Partner A</h3>
             </div>
             <div class="panel-body">
-              <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess1(response)">
+              <upload-button class="btn btn-primary btn-upload"
+                      url="/uploads"
+                      method="get"
+                      on-success="onGlobalSuccess1(response)">
                 Fileupload Partner A
-              </button>
+              </upload-button>
             </div>
           </div>
         </div>
@@ -181,9 +185,12 @@
               <h3 class="panel-title">Partner B</h3>
             </div>
             <div class="panel-body">
-              <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess2(response)">
-                Fileupload Partner B
-              </button>
+            <upload-button
+              class="btn btn-primary btn-upload"
+              url="/uploads"
+              method="get"
+              on-success="onGlobalSuccess2(response)"
+            >Fileupload Partner A</upload-button>
             </div>
           </div>
         </div>
