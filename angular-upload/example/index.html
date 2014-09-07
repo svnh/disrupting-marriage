@@ -92,7 +92,7 @@
         ],
         lineMode: 'linear',
         tension: 0.7,
-        tooltip: {mode: 'scrubber', formatter: function(x, y, series) {return 'pouet';}},
+        tooltip: {mode: 'scrubber', formatter: function(x, y, series) {return 'point';}},
         drawLegend: true,
         drawDots: true,
         columnsHGap: 0
@@ -131,53 +131,55 @@
   </script>
 </head>
 <body>
-  <div class="container" ng-controller="AppCtrl">
-    <div class="jumbotron">
-      <div class="jumbotron-body">
-        <h1>Disruptiv Marriage</h1>
-        <p>Evaluate your relationship. Should you start looking for your own appartment?? </p>
+  <div class="" ng-controller="AppCtrl">
+    <div class="jumbotron light-gray">
+      <div class="jumbotron-body container">
+        <h1>Disrupt-Marriage</h1>
+
+        <p>Predicting with 85% accuracy whether a couple will stay together or get divorced. </p>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-md-6">
-        <div class="panel panel-default him" ng-controller="SimpleCtrl">
-          <div class="panel-heading">
-            <h3 class="panel-title">Partner A</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess1(response)">
-              Fileupload Partner A
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="panel panel-default her" ng-controller="SimpleCtrl">
-          <div class="panel-heading">
-            <h3 class="panel-title">Partner B</h3>
-          </div>
-          <div class="panel-body">
-            <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess2(response)">
-              Fileupload Partner B
-            </button>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default him" ng-controller="SimpleCtrl">
+            <div class="panel-heading">
+              <h3 class="panel-title">Partner A</h3>
+            </div>
+            <div class="panel-body">
+              <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess1(response)">
+                Fileupload Partner A
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div class="center">
-        <button class="btn btn-primary btn-lg btn-upload" ng-show="fakeData1 && fakeData2" ng-click='process()'>Process</button>
-      </div>
-
-      <div>
-        <div ng-show="partner1Data">
-          <h3>Partner A</h3>
-          <linechart data="partner1Data" options="options" mode=""></linechart>
+        <div class="col-md-6">
+          <div class="panel panel-default her" ng-controller="SimpleCtrl">
+            <div class="panel-heading">
+              <h3 class="panel-title">Partner B</h3>
+            </div>
+            <div class="panel-body">
+              <button class="btn btn-primary btn-upload" ng-click="onGlobalSuccess2(response)">
+                Fileupload Partner B
+              </button>
+            </div>
+          </div>
         </div>
 
-        <div ng-show="partner2Data">
-          <h3>Partner B</h3>
-          <linechart data="partner2Data" options="options" mode=""></linechart>
+        <div class="center">
+          <button class="btn btn-primary btn-lg btn-upload" ng-show="fakeData1 && fakeData2" ng-click='process()'>Should I Get a Layer??</button>
+        </div>
+
+        <div>
+          <div ng-show="partner1Data">
+            <h3>Partner A</h3>
+            <linechart data="partner1Data" options="options" mode=""></linechart>
+          </div>
+
+          <div ng-show="partner2Data">
+            <h3>Partner B</h3>
+            <linechart data="partner2Data" options="options" mode=""></linechart>
+          </div>
         </div>
       </div>
     </div>
