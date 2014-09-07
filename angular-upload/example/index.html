@@ -45,6 +45,7 @@
 
       // Global handler for onSuccess that adds the uploaded files to the list
       $scope.onGlobalSuccess = function (response) {
+        console.log(response);
         $http({
           method: 'post',
           url: 'http://afternoon-escarpment-8726.herokuapp.com/process',
