@@ -17,19 +17,16 @@
   <![endif]-->
   <script src="/public/bower_components/angular/angular.js" charset="utf-8"></script>
   <script src="/public/angular-upload.js" charset="utf-8"></script>
+  <script src="/public/bower_components/d3/d3.js"></script>
+  <script src="/public/bower_components/n3-line-chart/dist/line-chart.js"></script>
 
   <script charset="utf-8">
 
     // Define our main app
     var app = angular.module('app', [
-      'lr.upload'
-//      'n3-line-chart'
+      'lr.upload',
+      'n3-line-chart'
     ]);
-//    app.config(['$httpProvider', function($httpProvider) {
-//          $httpProvider.defaults.useXDomain = true;
-//          delete $httpProvider.defaults.headers.common['X-Requested-With'];
-//      }
-//    ]);
 
     app.controller('AppCtrl', function ($scope, $http) {
 
@@ -61,36 +58,7 @@
         $scope.responseData = response.data;
         $scope.uploads = $scope.uploads.concat(response.data.files);
       };
-    });
-
-    app.controller('SimpleCtrl', function ($scope, $http) {
-      // Nothing special needed from the controller
-    });
-
-    app.controller('AdvancedMarkupCtrl', function ($scope, $http) {
-
-      // Valid mimetypes
-      $scope.acceptTypes = 'image/*,application/pdf';
-
-      // Data to be sent to the server with the upload request
-      $scope.uploadData = {
-        myformdata: 'hello world'
-      };
-
-      $scope.onUpload = function (files) {
-        console.log('AdvancedMarkupCtrl.onUpload', files);
-      };
-
-      $scope.onError = function (response) {
-        console.error('AdvancedMarkupCtrl.onError', response);
-        $scope.responseData = response.data;
-      };
-
-      $scope.onComplete = function (response) {
-        console.log('AdvancedMarkupCtrl.onComplete', response);
-        $scope.responseData = response.data;
-      };
-      $scope.graphData =[
+      $scope.data =[
         {x: 0, value: 4, otherValue: 14},
         {x: 1, value: 8, otherValue: 1},
         {x: 2, value: 15, otherValue: 11},
@@ -98,6 +66,28 @@
         {x: 4, value: 23, otherValue: 87},
         {x: 5, value: 42, otherValue: 45}
       ];
+      $scope.options = {
+        axes: {
+          x: {key: 'x', labelFunction: function(value) {return value;}, type: 'linear'},
+          y: {type: 'linear', min: 0, max: 100},
+          y2: {type: 'linear', min: 0, max: 100}
+        },
+        series: [
+          {y: 'value', color: 'steelblue', thickness: '2px', type: 'area', striped: true, label: 'Pouet'},
+          {y: 'otherValue', color: 'pink', thickness: '2px', type: 'area', striped: true, label: 'Pouet'},
+        ],
+        lineMode: 'linear',
+        tension: 0.7,
+        tooltip: {mode: 'scrubber', formatter: function(x, y, series) {return 'pouet';}},
+        drawLegend: true,
+        drawDots: true,
+        columnsHGap: 5
+      };
+
+    });
+
+    app.controller('SimpleCtrl', function ($scope, $http) {
+      // Nothing special needed from the controller
     });
 
     // Start it up
@@ -167,8 +157,10 @@
           </div>
         </div>
       </div>
+      {{ data }}
+      <linechart data="data" options="options" mode=""></linechart>
     </div>
-    <linechart data="graphData" options="options" mode=""></linechart>
+
   </div>
 
 </body>

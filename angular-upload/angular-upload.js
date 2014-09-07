@@ -72,7 +72,6 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
 
       if ('accept' in attr) {
         attr.$observe('accept', function uploadButtonAcceptObserve(value) {
-          fileInput.attr('accept', value);
         });
       }
 

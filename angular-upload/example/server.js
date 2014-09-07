@@ -4,7 +4,6 @@ var path = require('path');
 var fs = require('fs');
 var util = require('util');
 var express = require('express');
-var connect = require('connect');
 var cors = require('cors')
 
 var app = express();
