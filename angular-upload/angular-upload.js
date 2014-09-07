@@ -16,8 +16,7 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
       onUpload: '&',
       onSuccess: '&',
       onError: '&',
-      onComplete: '&',
-      headers: '@'
+      onComplete: '&'
     },
     link: function(scope, element, attr) {
 
@@ -36,8 +35,9 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
           method: scope.method || 'POST',
           forceIFrameUpload: scope.$eval(attr.forceIframeUpload) || false,
           data: scope.data || {},
-          headers: scope.headers || {},
-          crossDomain: true
+          crossDomain: true,
+          headers: {'X-Mashape-Key': 'p2YEJ3Z7lBmshli8kbKm1iDDlE2Yp1Pi3Pxjsn1pG4zTFz8LEl',
+          'Access-Control-Allow-Origin': '*' } || {}
         };
 
         options.data[scope.param || 'file'] = fileInput;
@@ -48,10 +48,12 @@ angular.module('lr.upload.directives').directive('uploadButton', function(upload
 
         upload(options).then(
           function (response) {
+            console.log(options);
             scope.onSuccess({response: response});
             scope.onComplete({response: response});
           },
           function (response) {
+            console.log(options);
             scope.onError({response: response});
             scope.onComplete({response: response});
           }

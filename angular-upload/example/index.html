@@ -48,14 +48,19 @@
 
       // Global handler for onSuccess that adds the uploaded files to the list
       $scope.onGlobalSuccess = function (response) {
-        console.log(response);
+        console.log(response.data);
         $http({
           method: 'post',
           url: 'http://afternoon-escarpment-8726.herokuapp.com/process',
           crossDomain: true,
           data: {
-            "emovuData": fakeData
+            "emovuData": $scope.fakeData
           }
+        }).success(function(data, status, headers, config) {
+          console.log(data);
+        }).error(function(data, status, headers, config) {
+          console.log(data);
+
         });
 
         console.log('AppCtrl.onSuccess', response);
@@ -142,7 +147,7 @@
               class="btn btn-primary btn-upload"
               url="https://eyeris-emovu1.p.mashape.com/api/video/"
               on-success="onGlobalSuccess(response)"
-              header='{X-Mashape-Key: "p2YEJ3Z7lBmshli8kbKm1iDDlE2Yp1Pi3Pxjsn1pG4zTFz8LEl"}'
+              headers='{X-Mashape-Key: "p2YEJ3Z7lBmshli8kbKm1iDDlE2Yp1Pi3Pxjsn1pG4zTFz8LEl"}'
             >Fileupload</upload-button>
           </div>
           <div class="panel-body">
@@ -165,7 +170,6 @@
               class="btn btn-primary btn-upload"
               url="https://eyeris-emovu1.p.mashape.com/api/video/"
               on-success="onGlobalSuccess(response)"
-              header='{X-Mashape-Key: "p2YEJ3Z7lBmshli8kbKm1iDDlE2Yp1Pi3Pxjsn1pG4zTFz8LEl"}'
             >Fileupload</upload-button>
           </div>
           <div class="panel-body">
